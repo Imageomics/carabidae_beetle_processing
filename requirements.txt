@@ -1,0 +1,35 @@
+# Python dependencies for Carabidae Beetle Processing Pipeline
+# Install with: pip install -r requirements.txt
+
+# Core dependencies
+torch>=2.0.0
+torchvision>=0.15.0
+transformers>=4.30.0
+pillow>=9.5.0
+
+# Computer vision and image processing
+opencv-python>=4.7.0
+
+# Data processing
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Geospatial (for notebook)
+folium>=0.14.0
+geopy>=2.3.0
+
+# Scientific computing
+scikit-learn>=1.2.0
+
+# Progress bars
+tqdm>=4.65.0
+
+# For XML parsing (standard library, but listing for documentation)
+# xml.etree.ElementTree - included in Python standard library
+
+# Optional: For GPU acceleration
+# cuda-toolkit  # Install separately based on your system
