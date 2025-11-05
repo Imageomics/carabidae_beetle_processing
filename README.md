@@ -40,14 +40,16 @@ The pipeline integrates computer vision (Grounding DINO), traditional image proc
 carabidae_beetle_processing/
 ├── 2018_neon_beetles_bbox.xml                      # CVAT annotations (577 images)
 ├── 2018_neon_beetles_get_individual_images.py      # Crop beetles from group images
+├── resizing_individual_beetle_images.py            # Resize individual images with uniform scaling
 ├── grounding_dion.ipynb                            # Zero-shot object detection pipeline
+├── upload_dataset_to_hf.py                         # Upload datasets to Hugging Face
 ├── InterAnnotator.py                               # Inter-annotator agreement analysis
-├── CalipersVsToras.py                              # Human vs. automated measurement 
+├── CalipersVsToras.py                              # Human vs. automated measurement comparison
 ├── Figure6and10.R                                  # NEON data analysis and visualization
 ├── .gitignore                                      # Git ignore patterns
 ├── LICENSE                                         # MIT License
 ├── CITATION.cff                                    # Citation metadata
-├── requirements.txt                                # Python dependencies (recommended)
+├── requirements.txt                                # Python dependencies
 └── README.md                                       # This file
 ```
 
@@ -90,7 +92,48 @@ Extracts individual beetle specimens from annotated group images using CVAT XML 
 - `parse_cvat_annotations(xml_path)`: Parse CVAT XML and extract image metadata
 - `crop_and_save_images(images_data, images_dir, output_dir, padding)`: Crop and save specimens
 
-### 3. **Zero-Shot Object Detection**
+### 3. **Image Resizing with Uniform Scaling**
+
+**Script:** `resizing_individual_beetle_images.py`
+
+Resizes individual beetle specimen images to match BeetlePalooza's resized group images using uniform scaling factors.
+
+**Purpose:**
+- Aligns individual specimen images with the resolution of BeetlePalooza's processed group images
+- Ensures morphometric measurements made on resized images can be accurately applied to individual specimens
+- Uses uniform scaling (average of x and y scale factors) for consistency
+
+**Workflow:**
+1. Calculate uniform scaling factors between original and BeetlePalooza resized group images
+2. Save scaling factors to JSON for reference and reproducibility
+3. Apply uniform scaling to all individual specimen images
+4. Generate processing summary with statistics
+
+### 4. **Dataset Upload to Hugging Face**
+
+**Script:** `upload_dataset_to_hf.py`
+
+Utility script for uploading processed beetle datasets to Hugging Face Hub for public access and reproducibility.
+
+**Usage:**
+```bash
+export HF_TOKEN="your_hugging_face_token"
+
+python upload_dataset_to_hf.py \
+    --folder_path /path/to/local/images \
+    --repo_id imageomics/dataset-name \
+    --path_in_repo images \
+    --branch main
+```
+
+**Parameters:**
+- `--folder_path`: Local directory containing files to upload
+- `--repo_id`: Hugging Face repository identifier (org/repo-name)
+- `--path_in_repo`: Subdirectory within the repository (default: "images")
+- `--repo_type`: Repository type - "dataset" or "model" (default: "dataset")
+- `--branch`: Target branch name (default: "main")
+
+### 5. **Zero-Shot Object Detection**
 
 **Notebook:** `grounding_dion.ipynb`
 
@@ -107,7 +150,7 @@ Advanced pipeline using **Grounding DINO** for automated beetle detection and se
    - Select best bounding box (largest area with highest confidence)
 4. Save individual beetle images and CSV metadata
 
-### 4. **Inter-Annotator Agreement**
+### 6. **Inter-Annotator Agreement**
 
 **Script:** `InterAnnotator.py`
 
@@ -128,7 +171,7 @@ Quantifies measurement consistency between multiple human annotators for continu
 - `InterAnnotatorAgreement.pdf`: Three-panel scatter plot
 - Console report with detailed metrics
 
-### 5. **Human vs. Automated System Validation**
+### 7. **Human vs. Automated System Validation**
 
 **Script:** `CalipersVsToras.py`
 
@@ -148,7 +191,7 @@ Evaluates TORAS measurement annotations performance against human expert measure
 - Quantitative performance metrics
 
 
-### 6. **NEON Data Analysis and Visualization**
+### 8. **NEON Data Analysis and Visualization**
 
 **Script:** `Figure6and10.R`
 
@@ -198,12 +241,6 @@ Comprehensive analysis of NEON beetle data from PUUM site (Hawaii) with BeetlePa
    ```bash
    pip install -r requirements.txt
    ```
-
-**Manual installation** (if not using requirements.txt):
-```bash
-pip install torch torchvision transformers pillow opencv-python pandas numpy \
-            matplotlib seaborn folium geopy tqdm scikit-learn
-```
 
 ### R Setup
 

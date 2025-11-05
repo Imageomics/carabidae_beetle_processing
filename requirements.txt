@@ -28,6 +28,9 @@ scikit-learn>=1.2.0
 # Progress bars
 tqdm>=4.65.0
 
+# Hugging Face integration
+huggingface-hub>=0.16.0
+
 # For XML parsing (standard library, but listing for documentation)
 # xml.etree.ElementTree - included in Python standard library
 
