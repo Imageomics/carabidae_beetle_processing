@@ -6,17 +6,17 @@
 
 ## 📋 Table of Contents
 
-- [Overview](#overview)
-- [Project Structure](#project-structure)
-- [Pipeline Components](#pipeline-components)
-- [Installation](#installation)
-- [Usage](#usage)
+- [Overview](#-overview)
+- [Project Structure](#-project-structure)
+- [Pipeline Components](#-pipeline-components)
+- [Installation](#-installation)
+- [Usage](#-usage)
   - [1. Individual Beetle Extraction](#1-individual-beetle-extraction)
   - [2. Zero-Shot Object Detection](#2-zero-shot-object-detection)
   - [3. Quality Control and Validation](#3-quality-control-and-validation)
   - [4. Data Visualization](#4-data-visualization)
-- [Data Sources](#data-sources)
-- [Citation](#citation)
+- [Data Sources](#-data-sources)
+- [Citation](#-citation)
 
 ---
 
