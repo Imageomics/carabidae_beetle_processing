@@ -17,6 +17,7 @@
   - [4. Data Visualization](#4-data-visualization)
 - [Data Sources](#-data-sources)
 - [Citation](#-citation)
+- [Acknowledgements](#acknowledgments)
 
 ---
 
@@ -475,14 +476,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgments
 
-This work was supported by both the Imageomics Institute and the AI and Biodiversity Change (ABC) Global Center. The Imageomics Institute is funded by the US National Science Foundation's Harnessing the Data Revolution (HDR) program under Award #2118240 (Imageomics: A New Frontier of Biological Information Powered by Knowledge-Guided Machine Learning). The ABC Global Center is funded by the US National Science Foundation under Award No. 2330423 and Natural Sciences and Engineering Research Council of Canada under Award No. 585136.
+This work was supported by both the [Imageomics Institute](https://imageomics.org) and the [AI and Biodiversity Change (ABC) Global Center](https://www.biodiversityai.org/). The Imageomics Institute is funded by the US National Science Foundation's Harnessing the Data Revolution (HDR) program under [Award #2118240](https://www.nsf.gov/awardsearch/showAward?AWD_ID=2118240) (Imageomics: A New Frontier of Biological Information Powered by Knowledge-Guided Machine Learning). 
+The ABC Global Center is funded by the US National Science Foundation under [Award No. 2330423](https://www.nsf.gov/awardsearch/showAward?AWD_ID=2330423&HistoricalAwards=false) and Natural Sciences and Engineering Research Council of Canada under [Award No. 585136](https://www.nserc-crsng.gc.ca/ase-oro/Details-Detailles_eng.asp?id=782440). This code draws on research supported by the Social Sciences and Humanities Research Council.
 
-S. Record and A. East were additionally supported by the US National Science Foundation's Award No. 242918 and by Hatch project Award #MEO-022425 from the US Department of Agriculture’s National Institute of Food and Agriculture.
+S. Record and A. East were additionally supported by the US National Science Foundation's [Award No. 242918](https://www.nsf.gov/awardsearch/showAward?AWD_ID=2429418&HistoricalAwards=false) (EPSCOR Research Fellows: NSF: Advancing National Ecological Observatory Network-Enabled Science and Workforce Development at the University of Maine with Artificial Intelligence) and by Hatch project Award #MEO-022425 from the US Department of Agriculture’s National Institute of Food and Agriculture. 
 
-This material is based in part upon work supported by the National Ecological Observatory Network (NEON), a program sponsored by the U.S. National Science Foundation (NSF) and operated under cooperative agreement by Battelle.
+This material is based in part upon work supported by the [U.S. National Ecological Observatory Network (NEON)](https://www.neonscience.org/), a program sponsored by the [U.S. National Science Foundation (NSF)](https://www.nsf.gov/) and operated under cooperative agreement by [Battelle](https://www.battelle.org/). This material uses specimens and/or samples collected as part of the NEON Program.
 
-Any opinions, findings and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the US National Science Foundation, the US Department of Agriculture, or Natural Sciences and Engineering Research Council of Canada.
-
+Any opinions, findings and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the US National Science Foundation, the US Department of Agriculture, the Natural Sciences and Engineering Research Council of Canada, or the Social Sciences and Humanities Research Council.
 
 ---
 
