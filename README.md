@@ -450,19 +450,14 @@ Manual annotations created using CVAT (Computer Vision Annotation Tool) for 577 
 If you use this code or methodology, please cite:
 
 ```bibtex
-@software{rayeed2025carabidae,
-  title = {Carabidae Beetle Processing Pipeline: Automated Morphometric Analysis and Quality Assessment},
-  author = {Rayeed, S M and Khurana, Mridul and East, Alyson and 
-            Fluck, Isadora E. and Campolongo, Elizabeth G. and Stevens, Samuel and 
-            Zarubiieva, Iuliia and Lowe, Scott C. and Denslow, Michael W. and 
-            Donoso, Evan D. and Wu, Jiaman and Ramirez, Michelle and 
-            Baiser, Benjamin and Stewart, Charles V. and Mabee, Paula and 
-            Berger-Wolf, Tanya and Karpatne, Anuj and Lapp, Hilmar and 
-            Guralnick, Robert P. and Taylor, Graham W. and Record, Sydne},
-  year = {2025},
-  version = {1.0.0},
-  institution = {Imageomics and ABC Institute},
-  url = {https://github.com/Imageomics/carabidae_beetle_processing},
+@software{Rayeed_Carabidae_Beetle_Processing_2025,
+   author = {Rayeed, S M and Khurana, Mridul and East, Alyson and Fluck, Isadora E. and Campolongo, Elizabeth G. and Stevens, Samuel and Zarubiieva, Iuliia and Lowe, Scott C. and Denslow, Michael W. and Donoso, Evan D. and Wu, Jiaman and Ramirez, Michelle and Baiser, Benjamin and Stewart, Charles V. and Mabee, Paula and Berger-Wolf, Tanya and Karpatne, Anuj and Lapp, Hilmar and Guralnick, Robert P. and Taylor, Graham W. and Record, Sydne},
+   license = {MIT},
+   month = nov,
+   title = {{Carabidae Beetle Processing Pipeline}},
+   url = {https://github.com/Imageomics/carabidae_beetle_processing},
+   version = {1.0.0},
+   year = {2025}
 }
 ```
 
@@ -484,9 +479,3 @@ S. Record and A. East were additionally supported by the US National Science Fou
 This material is based in part upon work supported by the [U.S. National Ecological Observatory Network (NEON)](https://www.neonscience.org/), a program sponsored by the [U.S. National Science Foundation (NSF)](https://www.nsf.gov/) and operated under cooperative agreement by [Battelle](https://www.battelle.org/). This material uses specimens and/or samples collected as part of the NEON Program.
 
 Any opinions, findings and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the US National Science Foundation, the US Department of Agriculture, the Natural Sciences and Engineering Research Council of Canada, or the Social Sciences and Humanities Research Council.
-
----
-
-**Last Updated:** November 2025  
-**Version:** 1.0  
-**Status:** Active Development
