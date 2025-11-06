@@ -38,17 +38,21 @@ The pipeline integrates computer vision (Grounding DINO), traditional image proc
 
 ```
 carabidae_beetle_processing/
-├── 2018_neon_beetles_bbox.xml                      # CVAT annotations (577 images)
-├── 2018_neon_beetles_get_individual_images.py      # Crop beetles from group images
-├── resizing_individual_beetle_images.py            # Resize individual images with uniform scaling
-├── grounding_dion.ipynb                            # Zero-shot object detection pipeline
+├── annotations/
+|    └── 2018_neon_beetles_bbox.xml                 # CVAT annotations (577 images)
+├── notebooks/
+|    └── grounding_dion.ipynb                       # Zero-shot object detection pipeline
+├── src/
+|    ├── 2018_neon_beetles_get_individual_images.py # Crop beetles from group images
+|    ├── resizing_individual_beetle_images.py       # Resize individual images with uniform scaling
+|    ├── InterAnnotator.py                          # Inter-annotator agreement analysis
+|    └── CalipersVsToras.py                         # Human vs. automated measurement comparison
+├── viz/
+|    └── Figure6and10.R                             # NEON data analysis and visualization
 ├── upload_dataset_to_hf.py                         # Upload datasets to Hugging Face
-├── InterAnnotator.py                               # Inter-annotator agreement analysis
-├── CalipersVsToras.py                              # Human vs. automated measurement comparison
-├── Figure6and10.R                                  # NEON data analysis and visualization
 ├── .gitignore                                      # Git ignore patterns
-├── LICENSE                                         # MIT License
 ├── CITATION.cff                                    # Citation metadata
+├── LICENSE                                         # MIT License
 ├── requirements.txt                                # Python dependencies
 └── README.md                                       # This file
 ```
