@@ -23,13 +23,13 @@
 
 ## 🎯 Overview
 
-This repository contains a complete pipeline for processing, analyzing, and validating beetle specimen images and morphometric measurements from the NEON (National Ecological Observatory Network) and BeetlePalooza datasets. The project focuses on **Carabidae** (ground beetles) and implements:
+This repository contains the complete pipeline used for processing, analyzing, and validating beetle specimen images and morphometric measurements for the [2018 NEON Ethanol-preserved Ground Beetles](https://huggingface.co/datasets/imageomics/2018-NEON-beetles) and [Hawaii Beetles](https://huggingface.co/datasets/imageomics/Hawaii-beetles) datasets. The project focuses on **Carabidae** (ground beetles) and implements:
 
-1. **Automated beetle detection and cropping** from group images using CVAT annotations and zero-shot object detection
-2. **Morphometric trait extraction** including elytra length and width measurements
-3. **Inter-annotator agreement analysis** comparing measurements between human annotators
-4. **Human vs. automated system validation** evaluating algorithmic measurements against manual measurements
-5. **Species distribution visualization** for PUUM (Pu'u Maka'ala Natural Area Reserve, Hawaii) site data
+1. **Automated beetle detection and cropping** from group images using CVAT annotations and zero-shot object detection.
+2. **Morphometric trait extraction** including elytra length and width measurements.
+3. **Inter-annotator agreement analysis** comparing measurements between human annotators.
+4. **Human vs. automated system validation** evaluating algorithmic measurements against manual measurements.
+5. **Species distribution visualization** for PUUM (Pu'u Maka'ala Natural Area Reserve, Hawaii) site data.
 
 The pipeline integrates computer vision (Grounding DINO), traditional image processing, and statistical validation to create a robust, reproducible workflow for entomological specimen digitization.
 
@@ -42,12 +42,12 @@ carabidae_beetle_processing/
 ├── annotations/
 |    └── 2018_neon_beetles_bbox.xml                 # CVAT annotations (577 images)
 ├── notebooks/
-|    └── grounding_dion.ipynb                       # Zero-shot object detection pipeline
+|    └── grounding_dino.ipynb                       # Zero-shot object detection pipeline
 ├── src/
 |    ├── 2018_neon_beetles_get_individual_images.py # Crop beetles from group images
 |    ├── resizing_individual_beetle_images.py       # Resize individual images with uniform scaling
-|    ├── InterAnnotator.py                          # Inter-annotator agreement analysis
-|    └── CalipersVsToras.py                         # Human vs. automated measurement comparison
+|    ├── inter_annotator.py                         # Inter-annotator agreement analysis
+|    └── calipers_vs_toras.py                       # Human vs. automated measurement comparison
 ├── viz/
 |    └── Figure6and10.R                             # NEON data analysis and visualization
 ├── upload_dataset_to_hf.py                         # Upload datasets to Hugging Face
@@ -101,7 +101,7 @@ Extracts individual beetle specimens from annotated group images using CVAT XML 
 
 **Script:** `resizing_individual_beetle_images.py`
 
-Resizes individual beetle specimen images to match BeetlePalooza's resized group images using uniform scaling factors.
+Resizes individual beetle specimen images to match BeetlePalooza's resized group images using uniform scaling factors. <<<< Is this for the 2018 NEON beetles to get measurements based on Zooniverse size???
 
 **Purpose:**
 - Aligns individual specimen images with the resolution of BeetlePalooza's processed group images
@@ -140,12 +140,12 @@ python upload_dataset_to_hf.py \
 
 ### 5. **Zero-Shot Object Detection**
 
-**Notebook:** `grounding_dion.ipynb`
+**Notebook:** `grounding_dino.ipynb`
 
 Advanced pipeline using **Grounding DINO** for automated beetle detection and segmentation.
 
 **Workflow:**
-1. Load beetle measurements from BeetlePalooza dataset
+1. Load beetle measurements from the [2018 NEON Ethanol-preserved Ground Beetles dataset](https://huggingface.co/datasets/imageomics/2018-NEON-beetles)
 2. Initialize Grounding DINO model (IDEA-Research/grounding-dino-base)
 3. For each image:
    - Detect beetles using text prompt ("a beetle")
@@ -157,7 +157,7 @@ Advanced pipeline using **Grounding DINO** for automated beetle detection and se
 
 ### 6. **Inter-Annotator Agreement**
 
-**Script:** `InterAnnotator.py`
+**Script:** `inter_annotator.py`
 
 Quantifies measurement consistency between multiple human annotators for continuous morphometric traits.
 
@@ -178,7 +178,7 @@ Quantifies measurement consistency between multiple human annotators for continu
 
 ### 7. **Human vs. Automated System Validation**
 
-**Script:** `CalipersVsToras.py`
+**Script:** `calipers_vs_toras.py`
 
 Evaluates TORAS measurement annotations performance against human expert measurements using calipers (gold standard).
 
@@ -415,6 +415,17 @@ The processed datasets from this pipeline are available on Hugging Face:
 #### 1. Hawaii Beetles Dataset
 **Repository:** [imageomics/Hawaii-beetles](https://huggingface.co/datasets/imageomics/Hawaii-beetles)
 
+- Group beetle images from PUUM site
+- CVAT bounding box annotations
+- Individual beetle crops
+- Taxonomic identifications
+- Collection metadata
+
+#### 2. 2018 NEON Ethanol-preserved Ground Beetles Dataset
+**Repository:** [imageomics/2018-NEON-beetles](https://huggingface.co/datasets/imageomics/2018-NEON-beetles)
+
+Contains NEON beetle data from 2018 including:
+
 Contains BeetlePalooza citizen science data including:
 - Individual beetle images (cropped and processed)
 - Morphometric measurements (elytra length and width)
@@ -422,17 +433,6 @@ Contains BeetlePalooza citizen science data including:
 - Specimen metadata (genus, species, collection information)
 - Site environmental data
 - User annotations from multiple annotators
-
-#### 2. 2018 NEON Beetles Dataset
-**Repository:** [imageomics/2018-NEON-beetles](https://huggingface.co/datasets/imageomics/2018-NEON-beetles)
-
-Contains NEON beetle data from 2018 including:
-- Group beetle images from PUUM site
-- CVAT bounding box annotations
-- Individual beetle crops
-- Taxonomic identifications
-- Collection metadata
-
 
 
 ### CVAT Annotations
@@ -447,11 +447,11 @@ Manual annotations created using CVAT (Computer Vision Annotation Tool) for 577 
 
 ### Citing This Software
 
-If you use this code or methodology, please cite:
+If you use this code or methodology, please both this repo and our paper:
 
 ```bibtex
 @software{Rayeed_Carabidae_Beetle_Processing_2025,
-   author = {Rayeed, S M and Khurana, Mridul and East, Alyson and Fluck, Isadora E. and Campolongo, Elizabeth G. and Stevens, Samuel and Zarubiieva, Iuliia and Lowe, Scott C. and Denslow, Michael W. and Donoso, Evan D. and Wu, Jiaman and Ramirez, Michelle and Baiser, Benjamin and Stewart, Charles V. and Mabee, Paula and Berger-Wolf, Tanya and Karpatne, Anuj and Lapp, Hilmar and Guralnick, Robert P. and Taylor, Graham W. and Record, Sydne},
+   author = {Rayeed, S M and Khurana, Mridul and East, Alyson and Fluck, Isadora E. and Campolongo, Elizabeth G. and Stevens, Samuel and Taylor, Graham W.},
    license = {MIT},
    month = nov,
    title = {{Carabidae Beetle Processing Pipeline}},
@@ -461,11 +461,17 @@ If you use this code or methodology, please cite:
 }
 ```
 
----
+**Paper:** Coming Soon!
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+<!--
+```bibtex
+@article{Rayeed_Ground_Beetles_2025,
+   author = {Rayeed, S M and Khurana, Mridul and East, Alyson and Fluck, Isadora E. and Campolongo, Elizabeth G. and Stevens, Samuel and Zarubiieva, Iuliia and Lowe, Scott C. and Denslow, Michael W. and Donoso, Evan D. and Wu, Jiaman and Ramirez, Michelle and Baiser, Benjamin and Stewart, Charles V. and Mabee, Paula and Berger-Wolf, Tanya and Karpatne, Anuj and Lapp, Hilmar and Guralnick, Robert P. and Taylor, Graham W. and Record, Sydne},
+   title = {A continental-scale dataset of ground beetles with high-resolution images and validated morphological trait measurements},
+   year = {2025}
+}
+```
+-->
 
 ---
 
