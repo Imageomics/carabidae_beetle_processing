@@ -43,14 +43,13 @@ carabidae_beetle_processing/
 |    └── 2018_neon_beetles_bbox.xml                 # CVAT annotations (577 images)
 ├── notebooks/
 |    └── grounding_dino.ipynb                       # Zero-shot object detection pipeline
-├── src/
+├── scripts/
 |    ├── 2018_neon_beetles_get_individual_images.py # Crop beetles from group images
-|    ├── resizing_individual_beetle_images.py       # Resize individual images with uniform scaling
+|    ├── Figure6and10.R                             # NEON data analysis and visualization
+|    ├── calipers_vs_toras.py                       # Human vs. automated measurement comparison
 |    ├── inter_annotator.py                         # Inter-annotator agreement analysis
-|    └── calipers_vs_toras.py                       # Human vs. automated measurement comparison
-├── viz/
-|    └── Figure6and10.R                             # NEON data analysis and visualization
-├── upload_dataset_to_hf.py                         # Upload datasets to Hugging Face
+|    ├── resizing_individual_beetle_images.py       # Resize individual images with uniform scaling
+|    └── upload_dataset_to_hf.py                         # Upload datasets to Hugging Face
 ├── .gitignore                                      # Git ignore patterns
 ├── CITATION.cff                                    # Citation metadata
 ├── LICENSE                                         # MIT License
