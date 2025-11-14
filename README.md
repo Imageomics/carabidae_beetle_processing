@@ -293,7 +293,7 @@ python 2018_neon_beetles_get_individual_images.py \
 Run the Jupyter notebook for automated beetle detection:
 
 ```bash
-jupyter notebook grounding_dion.ipynb
+jupyter notebook grounding_dino.ipynb
 ```
 
 **Key Configuration Variables** (modify in notebook):
@@ -318,7 +318,7 @@ padding = 0.1
 #### Inter-Annotator Agreement
 
 ```bash
-python InterAnnotator.py
+python inter_annotator.py
 ```
 
 **Configuration** (edit in script):
@@ -351,7 +351,7 @@ Annotator A vs Annotator B:
 #### Human vs. Automated System
 
 ```bash
-python CalipersVsToras.py
+python calipers_vs_toras.py
 ```
 
 **Configuration** (edit in script):
