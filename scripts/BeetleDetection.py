@@ -1,10 +1,7 @@
 import warnings
 import os
 import csv
-import json
-import uuid
 import torch
-import transformers
 import pandas as pd
 import torchvision.ops as ops
 from PIL import Image
