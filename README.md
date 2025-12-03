@@ -46,10 +46,11 @@ carabidae_beetle_processing/
 ├── scripts/
 |    ├── 2018_neon_beetles_get_individual_images.py # Crop beetles from group images
 |    ├── Figure6and10.R                             # NEON data analysis and visualization
+|    ├── beetle_detection.py                        # Grounding-Dino-based detection of beetles
 |    ├── calipers_vs_toras.py                       # Human vs. automated measurement comparison
 |    ├── inter_annotator.py                         # Inter-annotator agreement analysis
 |    ├── resizing_individual_beetle_images.py       # Resize individual images with uniform scaling
-|    └── upload_dataset_to_hf.py                         # Upload datasets to Hugging Face
+|    └── upload_dataset_to_hf.py                    # Upload datasets to Hugging Face
 ├── .gitignore                                      # Git ignore patterns
 ├── CITATION.cff                                    # Citation metadata
 ├── LICENSE                                         # MIT License
@@ -141,11 +142,27 @@ python upload_dataset_to_hf.py \
 
 **Notebook:** `grounding_dino.ipynb`
 
-Advanced pipeline using **Grounding DINO** for automated beetle detection and segmentation.
+Advanced pipeline using **Grounding DINO** for automated beetle detection and segmentation. `scripts/beetle_detection.py` is this notebook converted to a runnable script. An example minimal run (passing only required parameters) is provided below:
+
+```console
+python scripts/beetle_detection.py \
+  --csv_path data/metadata.csv \
+  --image_dir data/group_images \
+  --save_folder data/individual_images \
+  --output_csv data/processed.csv
+```
+
+Additional optional parameters that can be passed are as follows:
+- `model_id`: Model ID for Grounding-DINO, default is `IDEA-Research/grounding-dino-base`.
+- `text`: Text prompt for detection, default is `"a beetle."`.
+- `box_threshold`: Box threshold for detection, default is `0.2`.
+- `text_threshold`: Text threshold for detection,default is `0.2`.
+- `padding`: Padding factor for cropping, default is `0.1`.
+- `iou_threshold`: IoU threshold for Non-Maximum Suppression (NMS), default is `0.6`.
 
 **Workflow:**
 1. Load beetle measurements from the [2018 NEON Ethanol-preserved Ground Beetles dataset](https://huggingface.co/datasets/imageomics/2018-NEON-beetles)
-2. Initialize Grounding DINO model (IDEA-Research/grounding-dino-base)
+2. Initialize Grounding DINO model
 3. For each image:
    - Detect beetles using text prompt ("a beetle")
    - Filter detections based on adaptive area thresholds
@@ -290,13 +307,17 @@ python 2018_neon_beetles_get_individual_images.py \
 
 ### 2. Zero-Shot Object Detection
 
-Run the Jupyter notebook for automated beetle detection:
+Run `scripts/beetle_detection.py` (or `notebook grounding_dino.ipynb`) for automated beetle detection.
 
-```bash
-jupyter notebook grounding_dino.ipynb
+```console
+python scripts/beetle_detection.py \
+  --csv_path data/metadata.csv \
+  --image_dir data/group_images \
+  --save_folder data/individual_images \
+  --output_csv data/processed.csv
 ```
 
-**Key Configuration Variables** (modify in notebook):
+**Key Configuration Variables** (as in notebook):
 
 ```python
 # Data paths
