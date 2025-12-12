@@ -8,13 +8,13 @@ library(ggpubr)  # For publication-ready themes in ggplot2
 #------------------------------------------------------------
 
 # Set working directory to the path where the project files are stored
-setwd("/fs/ess/PAS2136/Hawaii-2025/beetles_intake/")
+setwd("/user/beetles_intake") #path anonymized
 
 # Define NEON data product ID for beetle data
 Beetle_dpID <- "DP1.10022.001"
 
 # Load NEON API token for accessing the data
-NEON_TOKEN <- read.delim("/users/PAS2136/alyeast/Beetle/QC/NEON_Token_AE", header = FALSE)[1, 1]  # Read in the NEON API token
+NEON_TOKEN <- read.delim("/user/Token", header = FALSE)[1, 1]  # Read in the NEON API token path anonymized
 
 # Load the beetle data from NEON API using the 'neonUtilities' package
 NEON_df <- neonUtilities::loadByProduct(
@@ -123,7 +123,7 @@ unique_beetle$scientificName <- factor(unique_beetle$scientificName,
                                 levels = names(sort(table(unique_beetle$scientificName), decreasing = FALSE)))
 
 # Create a bar plot for species abundance in the PUUM dataset
-png("/users/PAS2136/alyeast/Beetle/DataVis/BeetlePUUM_abundance.png", width = 10, height = 5, units = "in", res = 300)  # Set output file and resolution
+png("./BeetlePUUM_abundance.png", width = 10, height = 5, units = "in", res = 300)  # Set output file and resolution
 ggplot(data = unique_beetle, aes(x = scientificName)) +  # Create bar plot for scientificName (species)
   geom_bar() +  # Add bars for the count of each species
   geom_text(stat='count', aes(label = ..count..), hjust = -0.3, size = 3, angle = 90) +# Add count labels above the bars
@@ -158,7 +158,7 @@ total_counts <- combined_data_merge %>%
   group_by(scientificName.x) %>%
   summarise(total = n(), .groups = "drop")
 
-png("/users/PAS2136/alyeast/Beetle/DataVis/BeetlePUUM_abundance.png", width = 6.5, height = 4, units = "in", res = 300)  # Set output file and resolution
+png("./BeetlePUUM_abundance.png", width = 6.5, height = 4, units = "in", res = 300)  # Set output file and resolution
 ggplot(data = combined_data_merge, aes(x = scientificName.x, fill = imaged)) +
   geom_bar() +
   geom_text(data = total_counts, aes(x = scientificName.x, y = total, label = total),
@@ -215,7 +215,7 @@ dim(table(meta_Plooza$genus_spp))/dim(table(all$scientificName))
 dim(table(meta_Plooza$NEON_sampleID))/dim(table(all$sampleID))
 
 # Create a bar plot for species abundance in the BeetlePalooza dataset
-png("/users/PAS2136/alyeast/Beetle/DataVis/BeetlePalooza_abundance.png", width = 10, height = 10, units = "in", res = 300)# Set output file and resolution
+png("./BeetlePalooza_abundance.png", width = 10, height = 10, units = "in", res = 300)# Set output file and resolution
 ggplot(data = meta_Plooza, aes(x = genus_spp)) +  # Create bar plot for genus_species (combined genus and species)
   geom_bar(fill="#ba1419") +  # Add bars for the count of each genus_species combination
   geom_text(stat='count', aes(label = ..count..), hjust = -0.3, size = 3) + # Add count labels above the bars
@@ -239,7 +239,7 @@ all$spp_imaged <- ifelse(
 # (optional) turn into a factor with a consistent ordering
 all$spp_imaged <- factor(all$spp_imaged, levels = c("unimaged","imaged"))
 
-png("/users/PAS2136/alyeast/Beetle/DataVis/BeetlePalooza_NEON_abundance.png", width = 5, height = 4, units = "in", res = 300)# Set output file and resolution
+png("./BeetlePalooza_NEON_abundance.png", width = 5, height = 4, units = "in", res = 300)# Set output file and resolution
 ggplot(data = all, aes(x = scientificName, fill=spp_imaged)) +  # Create bar plot for genus_species (combined genus and species)
   geom_bar() +  # Add bars for the count of each genus_species combination
 #  geom_text(stat='count', aes(label = ..count..), hjust = -0.3, size = 3) + # Add count labels above the bars
@@ -270,7 +270,7 @@ img_spp_key<-as.data.frame(img_spp_key[,c("ImageFileName","Species")])
 img_spp_key$file<-paste0("IMG_",substr(img_spp_key$ImageFileName, 5,nchar(img_spp_key$ImageFileName)),".JPG")
 
 #Read in file with body sizes from annotations
-body_size<-read.csv("/fs/ess/PAS2136/Hawaii-2025/beetles_intake/BeetlePUUM/Annotations/traits_metadata.csv")
+body_size<-read.csv("./BeetlePUUM/Annotations/traits_metadata.csv")
 head(body_size)
 head(img_spp_key)
 body_size$toras_path<-paste0(substr(body_size$ImageFilePath, 14, (nchar(body_size$ImageFilePath)-4)),".JPG")
@@ -284,7 +284,7 @@ species_counts <- table(body_size$Species)
 legend_labels <- paste0(names(species_counts), " (n=", species_counts, ")")
 names(legend_labels) <- names(species_counts)  # Assign species as names
 
-png("/users/PAS2136/alyeast/Beetle/DataVis/PUUM_bodysize_all.png", width = 12, height = 6, units = "in", res = 300)# Set output file and resolution
+png("./PUUM_bodysize_all.png", width = 12, height = 6, units = "in", res = 300)# Set output file and resolution
 ggplot(data = body_size, aes(x = cm_elytra_max_length, fill = Species)) +
   geom_density(alpha = 0.5) +
   xlab("Elytra Length (cm)") +
@@ -300,7 +300,7 @@ body_size_NEON<-merge(body_size, combined_data, by="individualID", all.x = TRUE,
 
 body_size_NEON<-subset(body_size_NEON, plotID!="PUUM_016")
 
-png("/users/PAS2136/alyeast/Beetle/DataVis/PUUM_bodysize_all.png", width = 12, height = 6, units = "in", res = 300)# Set output file and resolution
+png("./PUUM_bodysize_all.png", width = 12, height = 6, units = "in", res = 300)# Set output file and resolution
 ggplot(data = body_size_NEON, aes(x = cm_elytra_max_length, fill = scientificName)) +
   geom_density(alpha = 0.5) +
   xlab("Elytra Length (cm)") +
@@ -318,12 +318,12 @@ legend <- get_legend(density_plot)
 
 library(grid)
 library(gridExtra) 
-png("/users/PAS2136/alyeast/Beetle/DataVis/PUUM_bodysize_legend.png", width = 2.5, height = 4, units = "in", res = 300, bg = "transparent")# Set output file and resolution
+png("./PUUM_bodysize_legend.png", width = 2.5, height = 4, units = "in", res = 300, bg = "transparent")# Set output file and resolution
 grid.newpage()
 grid.draw(legend)
 dev.off()
 
-png("/users/PAS2136/alyeast/Beetle/DataVis/PUUM_bodysize_all_wrap_4.png", width = 9, height = 9, units = "in", res = 300)# Set output file and resolution
+png("./PUUM_bodysize_all_wrap_4.png", width = 9, height = 9, units = "in", res = 300)# Set output file and resolution
 ggplot(data = body_size_NEON, aes(x = cm_elytra_max_length, fill = scientificName)) +
   geom_density(alpha = 0.5) +
   xlab("Elytra Length (cm)") +
@@ -342,7 +342,7 @@ Plot_locations<-as.data.frame(Plot_locations)
 Plot_locations<-Plot_locations[-c(10),]
 Plot_locations
 
-write.csv(Plot_locations, "/users/PAS2136/alyeast/Beetle/DataVis/Plot_locations.csv")
+write.csv(Plot_locations, "./Plot_locations.csv")
 
 # 2. Subset to species with >10 individuals
 species_to_keep <- names(species_counts[species_counts > 10])
@@ -368,7 +368,7 @@ body_size<-subset(body_size, length_cm>0)
 
 
 # 5. Plot
-png("/users/PAS2136/alyeast/Beetle/DataVis/PUUM_bodysize.png", width = 12, height = 6, units = "in", res = 300)# Set output file and resolution
+png("./PUUM_bodysize.png", width = 12, height = 6, units = "in", res = 300)# Set output file and resolution
 ggplot(data = body_size_filtered, aes(x = length_cm, fill = Species)) +
   geom_density(alpha = 0.5) +
   xlab("Elytra Length (cm)") +
@@ -379,7 +379,7 @@ dev.off()
 
 
 min(body_size$length_cm)
-png("/users/PAS2136/alyeast/Beetle/DataVis/PUUM_bodysize_all.png", width = 10, height = 10, units = "in", res = 300)# Set output file and resolution
+png("./PUUM_bodysize_all.png", width = 10, height = 10, units = "in", res = 300)# Set output file and resolution
 ggplot(data = body_size, aes(x=length_cm, fill = Species)) +
   geom_density(alpha=0.5) +
   theme_pubr() +  # Apply publication-style theme
@@ -420,4 +420,4 @@ site_summary<-as.data.frame(site_summary)
 site_summary<-rbind(site_summary, c("PUUM", n_distinct(unique_beetle$Species), nrow(unique_beetle)))
 tail(site_summary)
 
-write.csv(site_summary, "/users/PAS2136/alyeast/Beetle/DataVis/site_summary.csv")
+write.csv(site_summary, "./site_summary.csv")
