@@ -1,4 +1,5 @@
 cff-version: 1.2.0
+abstract: "Pipeline for processing, analyzing, and validating beetle specimen images and morphometric measurements from NEON (National Ecological Observatory Network) beetle specimens (specifically for 2018 NEON Beetles and Hawaii Beetles datasets). The project focuses on Carabidae (ground beetles) and implements automated beetle detection and cropping, morphometric trait extraction, inter-annotator agreement analysis, human vs. automated system validation, and species distribution visualization."
 title: "Carabidae Beetle Processing Pipeline"
 message: "If you find this software helpful in your research, please cite both the software and our paper."
 type: software
@@ -6,71 +7,32 @@ authors:
   - family-names: "Rayeed"
     given-names: "S M"
     email: "rayees@rpi.edu"
-    affiliation: "Rensselaer Polytechnic Institute, Department of Computer Science, Troy NY, 12180, USA"
+    affiliation: "Rensselaer Polytechnic Institute"
   - family-names: "Khurana"
     given-names: "Mridul"
     email: "mridul@vt.edu"
-    affiliation: "Virginia Tech, Department of Computer Science, Blacksburg VA, 24061, USA"
+    affiliation: "Virginia Tech"
   - family-names: "East"
     given-names: "Alyson"
     email: "sydne.record@maine.edu"
-    affiliation: "The University of Maine, Department of Wildlife, Fisheries, and Conservation Biology, Orono ME, 04469, USA"
-  - family-names: "Fluck"
-    given-names: "Isadora E."
-    affiliation: "University of Florida, Department of Wildlife Ecology and Conservation, Gainesville FL, 32611, USA"
+    affiliation: "The University of Maine"
   - family-names: "Campolongo"
     given-names: "Elizabeth G."
-    affiliation: "The Ohio State University, Imageomics Institute & ABC Global Climate Center, Columbus OH, 43210, USA"
+    affiliation: "The Ohio State University"
   - family-names: "Stevens"
     given-names: "Samuel"
-    affiliation: "The Ohio State University, Department of Computer Science and Engineering, Columbus OH, 43210, USA"
-  - family-names: "Zarubiieva"
-    given-names: "Iuliia"
-    affiliation: "Vector Institute, Toronto ON, M5G 0C6, Canada"
-  - family-names: "Lowe"
-    given-names: "Scott C."
-    affiliation: "Vector Institute, Toronto ON, M5G 0C6, Canada"
-  - family-names: "Denslow"
-    given-names: "Michael W."
-    affiliation: "University of Florida, Florida Museum of Natural History, Gainesville FL, 32611, USA"
-  - family-names: "Donoso"
-    given-names: "Evan D."
-    affiliation: "National Ecological Observatory Network, Pu'u Maka'ala Natural Area Reserve, Hilo HI, 96720, USA"
+    affiliation: "The Ohio State University"
   - family-names: "Wu"
     given-names: "Jiaman"
-    affiliation: "The Ohio State University, Department of Computer Science and Engineering, Columbus OH, 43210, USA"
-  - family-names: "Ramirez"
-    given-names: "Michelle"
-    affiliation: "The Ohio State University, Department of Computer Science and Engineering, Columbus OH, 43210, USA"
-  - family-names: "Baiser"
-    given-names: "Benjamin"
-    affiliation: "University of Florida, Department of Wildlife Ecology and Conservation, Gainesville FL, 32611, USA"
-  - family-names: "Stewart"
-    given-names: "Charles V."
-    affiliation: "Rensselaer Polytechnic Institute, Department of Computer Science, Troy NY, 12180, USA"
-  - family-names: "Mabee"
-    given-names: "Paula"
-    affiliation: "National Ecological Observatory Network, Boulder, CO 80301, USA"
-  - family-names: "Berger-Wolf"
-    given-names: "Tanya"
-    affiliation: "The Ohio State University, Imageomics Institute & ABC Global Climate Center, Columbus OH, 43210, USA"
-  - family-names: "Karpatne"
-    given-names: "Anuj"
-    affiliation: "Virginia Tech, Department of Computer Science, Blacksburg VA, 24061, USA"
-  - family-names: "Lapp"
-    given-names: "Hilmar"
-    affiliation: "Duke University, Department of Biostatistics and Bioinformatics, Durham NC, 27708, USA"
-  - family-names: "Guralnick"
-    given-names: "Robert P."
-    affiliation: "University of Florida, Florida Museum of Natural History, Gainesville FL, 32611, USA"
+    affiliation: "The Ohio State University"
   - family-names: "Taylor"
     given-names: "Graham W."
-    affiliation: "University of Guelph, School of Engineering, Guelph ON, N1G 2W1, Canada"
-  - family-names: "Record"
-    given-names: "Sydne"
-    email: "sydne.record@maine.edu"
-    affiliation: "The University of Maine, Department of Wildlife, Fisheries, and Conservation Biology, Orono ME, 04469, USA"
+    affiliation: "University of Guelph"
 repository-code: "https://github.com/Imageomics/carabidae_beetle_processing"
+identifiers:
+  - description: "The GitHub release URL of tag v1.0.0."
+    type: url
+    value: "https://github.com/Imageomics/carabidae_beetle_processing/releases/tag/v1.0.0"
 keywords:
   - imageomics
   - computer-vision
@@ -82,6 +44,21 @@ keywords:
   - zero-shot-detection
   - quality-control
   - biodiversity
+  - ecology
+  - animals
+  - image
+  - segmentation
+  - species
+  - elytra
+  - basal pronotum
+  - traits
+  - annotation
+  - measurements
+  - pinned specimens
+  - Hawaii
+  - ground-beetles
 license: MIT
 version: "1.0.0"
-date-released: "2025-11-05"
+date-released: "2025-11-XX" # Update before release!
+#doi: Add version agnostic DOI on release
+type: software
