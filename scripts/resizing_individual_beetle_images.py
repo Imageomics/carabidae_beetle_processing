@@ -7,7 +7,7 @@ from PIL import Image
 import numpy as np
 
 # Set Base Directories
-BASE_DIR = "2018-NEON-beetles"
+BASE_DIR = "path/to/2018-NEON-beetles"
 ORIGINAL_GROUP_IMAGES_DIR = os.path.join(BASE_DIR, "group_images")
 PROCESS_DIR = os.path.join(BASE_DIR, "processed_images")
 
