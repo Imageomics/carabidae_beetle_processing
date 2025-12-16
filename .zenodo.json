@@ -1,0 +1,70 @@
+{
+    "creators": [
+      {
+          "name": "Rayeed, S M",
+          "affiliation": "Rensselaer Polytechnic Institute"
+      },
+      {
+          "name": "Khurana, Mridul",
+          "affiliation": "Virginia Tech"
+      },
+      {
+        "name": "East, Alyson",
+        "affiliation": "The University of Maine"
+      },
+      {
+        "name": "Campolongo, Elizabeth G.",
+        "affiliation": "The Ohio State University"
+      },
+      {
+        "name": "Stevens, Samuel",
+        "affiliation": "The Ohio State University"
+      },
+      {
+        "name": "Wu, Jiaman",
+        "affiliation": "The Ohio State University"
+      },
+      {
+        "name": "Taylor, Graham W.",
+        "affiliation": "University of Guelph"
+      }
+    ],
+    "description": "Pipeline for processing, analyzing, and validating beetle specimen images and morphometric measurements from NEON (National Ecological Observatory Network) beetle specimens (specifically for the <a href=\"https://huggingface.co/datasets/imageomics/2018-NEON-beetles\">2018 NEON Beetles</a> and <a href=\"https://huggingface.co/datasets/imageomics/Hawaii-beetles\">Hawaii Beetles</a> datasets). The project focuses on Carabidae (ground beetles) and implements automated beetle detection and cropping, morphometric trait extraction, inter-annotator agreement analysis, human vs. automated system validation, and species distribution visualization.",
+    "keywords": [
+      "imageomics",
+      "computer-vision",
+      "beetles",
+      "carabidae",
+      "morphometrics",
+      "neon",
+      "grounding-dino",
+      "zero-shot-detection",
+      "quality-control",
+      "biodiversity",
+      "ecology",
+      "animals",
+      "image",
+      "segmentation",
+      "species",
+      "elytra",
+      "basal pronotum",
+      "traits",
+      "annotation",
+      "measurements",
+      "pinned specimens",
+      "Hawaii",
+      "ground-beetles"
+    ],
+    "title": "Carabidae Beetle Processing Pipeline",
+    "version": "1.0.0",
+    "license": "MIT",
+    "publication_date": "2025-12-17",
+    "grants": [
+        {
+            "id": "021nxhr62::2118240"
+        },
+        {
+            "id": "021nxhr62::2330423"
+        }
+    ] 
+}
