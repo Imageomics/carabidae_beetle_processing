@@ -9,12 +9,14 @@
 - [Overview](#-overview)
 - [Project Structure](#-project-structure)
 - [Pipeline Components](#-pipeline-components)
+  - [1. Image Annotation and Extraction](#1-image-annotation-and-extraction)
+  - [2. Traditional Bouding Box Cropping (Individual Beetle Extraction)](#2-traditional-bounding-box-cropping)
+  - [3. Image Resizing with Uniform Scaling](#3-image-resizing-with-uniform-scaling)
+  - [4. Zero-Shot Object Detection](#4-zero-shot-object-detection)
+  - [5. Quality Control and Validation](#5-quality-control-and-validation)
+  - [6. NEON Data Analysis and Visualization](#6-neon-data-analysis-and-visualization)
+  - [7. Dataset Upload to Hugging Face](#7-dataset-upload-to-hugging-face)
 - [Installation](#%EF%B8%8F-installation)
-- [Usage](#-usage)
-  - [1. Individual Beetle Extraction](#1-individual-beetle-extraction)
-  - [2. Zero-Shot Object Detection](#2-zero-shot-object-detection)
-  - [3. Quality Control and Validation](#3-quality-control-and-validation)
-  - [4. Data Visualization](#4-data-visualization)
 - [Data Sources](#-data-sources)
 - [Citation](#-citation)
 - [Acknowledgements](#acknowledgments)
@@ -62,6 +64,8 @@ carabidae_beetle_processing/
 
 ## 🔬 Pipeline Components
 
+The pipeline and usage instructions are provided below. Please be sure to set up your coding environments appropriately for the needed portion of the pipeline (see [Installation](#%EF%B8%8F-installation) for detailed guidance).
+
 ### 1. **Image Annotation and Extraction**
 
 **File:** `2018_neon_beetles_bbox.xml`
@@ -70,7 +74,6 @@ CVAT (Computer Vision Annotation Tool) annotations containing:
 - 577 annotated images
 - Bounding box coordinates for individual beetles in group images
 - Image dimensions (5568 × 3712 pixels)
-- Created: April 2025
 
 **Format:**
 ```xml
@@ -86,42 +89,32 @@ CVAT (Computer Vision Annotation Tool) annotations containing:
 
 Extracts individual beetle specimens from group images using CVAT XML bounding box annotations. Parses coordinates, crops specimens with optional padding, and saves as numbered PNG files with progress tracking.
 
+#### Usage Instructions
+
+Extract individual beetles from group images using CVAT annotations:
+
+```bash
+python scripts/2018_neon_beetles_get_individual_images.py \
+    --xml_file annotations/2018_neon_beetles_bbox.xml \
+    --images_dir /path/to/group_images/ \
+    --output_dir /path/to/individual_beetles/ \
+    --padding 0
+```
+
+Outputs individual beetle images named `{original_name}_specimen_{N}.png`.
+
 ### 3. **Image Resizing with Uniform Scaling**
 
 **Script:** `resizing_individual_beetle_images.py`
 
-Aligns individual beetle crops with BeetlePalooza's Zooniverse-processed group images by applying uniform scaling factors. This enables accurate transfer of citizen science measurements from resized group images to individual specimens.
+Aligns individual beetle crops with the 2018-NEON-Beetles Zooniverse-processed group images by applying uniform scaling factors. This enables accurate transfer of citizen science measurements from resized group images to individual specimens. Set proper base directories at the top of the script before use.
 
 **Workflow:**
 1. Calculate uniform scaling factors (average of x and y) between original and resized group images
 2. Apply scaling to all individual specimen images
 3. Save scaling metadata and processing statistics to JSON
 
-### 4. **Dataset Upload to Hugging Face**
-
-**Script:** `upload_dataset_to_hf.py`
-
-Utility script for uploading processed beetle datasets to Hugging Face Hub for public access and reproducibility.
-
-**Usage:**
-```bash
-export HF_TOKEN="your_hugging_face_token"
-
-python upload_dataset_to_hf.py \
-    --folder_path /path/to/local/images \
-    --repo_id imageomics/dataset-name \
-    --path_in_repo images \
-    --branch main
-```
-
-**Parameters:**
-- `--folder_path`: Local directory containing files to upload
-- `--repo_id`: Hugging Face repository identifier (org/repo-name)
-- `--path_in_repo`: Subdirectory within the repository (default: "images")
-- `--repo_type`: Repository type - "dataset" or "model" (default: "dataset")
-- `--branch`: Target branch name (default: "main")
-
-### 5. **Zero-Shot Object Detection**
+### 4. **Zero-Shot Object Detection**
 
 **Script:** `beetle_detection.py` | **Notebook:** `grounding_dino.ipynb`
 
@@ -141,26 +134,71 @@ Optional parameters: `--model_id` (default: `IDEA-Research/grounding-dino-base`)
 
 The pipeline detects beetles using text prompts, filters by adaptive area thresholds, validates measurement points, applies NMS to remove duplicates, and selects optimal bounding boxes before saving crops and metadata.
 
-### 6. **Inter-Annotator Agreement**
+### 5. Quality Control and Validation
+
+#### Inter-Annotator Agreement
 
 **Script:** `inter_annotator.py`
 
 Quantifies measurement consistency between human annotators using three pairwise comparisons. Computes RMSE (measurement disagreement), R² (correlation strength), and average bias (systematic tendencies). Generates `InterAnnotatorAgreement.pdf` with scatter plots and console metrics report.
 
-### 7. **Human vs. Automated System Validation**
+```bash
+python scripts/inter_annotator.py
+```
+
+Edit `DATA_PATH` and `ANNOTATOR_PAIRS` in the script to configure input data and comparisons. Outputs `InterAnnotatorAgreement.pdf` and console metrics.
+
+#### Human vs. Automated System
 
 **Script:** `calipers_vs_toras.py`
 
 Validates automated TORAS measurements against human caliper measurements (gold standard). Compares three annotators individually and averaged against the automated system using RMSE, R², and bias metrics. Generates `CalipersVsToras.pdf` with comparison plots.
 
+```bash
+python scripts/calipers_vs_toras.py
+```
 
-### 8. **NEON Data Analysis and Visualization**
+Edit configuration variables in the script for data paths and comparison pairs. Generates `CalipersVsToras.pdf` with validation metrics.
+
+### 6. **NEON Data Analysis and Visualization**
 
 **Script:** `Figure6and10.R`
 
 Analyzes NEON beetle data from PUUM site (Pu'u Maka'ala Natural Area Reserve, Hawaii) integrated with BeetlePalooza citizen science measurements. Retrieves data via NEON API, merges taxonomic identifications with morphometric measurements, and generates species abundance visualizations. Produces `BeetlePUUM_abundance.png` showing imaging status and merged analysis dataset.
 
+Run R script for NEON data analysis:
+
+```bash
+Rscript scripts/Figure6and10.R
+```
+
+Requires NEON API token saved in `NEON_Token.txt` (see [NEON token instructions](#neon-api-token)) and BeetlePalooza metadata (2018-NEON-Beetles `individual_metadata.csv`). Edit paths in script as needed. Produces `BeetlePUUM_abundance.png` showing species distributions.
+
 **Requirements:** R packages: `ggplot2`, `dplyr`, `ggpubr`, `neonUtilities`
+
+### 7. **Dataset Upload to Hugging Face**
+
+**Script:** `upload_dataset_to_hf.py`
+
+Utility script used to upload the processed beetle datasets to Hugging Face Hub for public access and reproducibility.
+
+**Usage:**
+```bash
+export HF_TOKEN="your_hugging_face_token"
+
+python upload_dataset_to_hf.py \
+    --folder_path /path/to/local/images \
+    --repo_id imageomics/dataset-name \
+    --path_in_repo images \
+    --branch main
+```
+
+**Parameters:**
+- `--folder_path`: Local directory containing files to upload
+- `--repo_id`: Hugging Face repository identifier (org/repo-name)
+- `--path_in_repo`: Subdirectory within the repository (default: "images")
+- `--repo_type`: Repository type - "dataset" or "model" (default: "dataset")
+- `--branch`: Target branch name (default: "main")
 
 ---
 
@@ -168,16 +206,15 @@ Analyzes NEON beetle data from PUUM site (Pu'u Maka'ala Natural Area Reserve, Ha
 
 ### Prerequisites
 
-- **Python 3.10+** (for Python scripts and notebooks)
-- **R 4.0+** (for R scripts)
-- **Git** (for version control)
+- **Python 3.10+**
+- **R 4.0+**
 - **CUDA-capable GPU** (recommended for Grounding DINO, but not required)
 
 ### Python Setup
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/mridulk97/carabidae_beetle_processing.git
+   git clone git@github.com:Imageomics/carabidae_beetle_processing.git
    cd carabidae_beetle_processing
    ```
 
@@ -212,71 +249,11 @@ For R script (`Figure6and10.R`):
 
 ---
 
-## 🚀 Usage
-
-### 1. Individual Beetle Extraction
-
-Extract individual beetles from group images using CVAT annotations:
-
-```bash
-python scripts/2018_neon_beetles_get_individual_images.py \
-    --xml_file annotations/2018_neon_beetles_bbox.xml \
-    --images_dir /path/to/group_images/ \
-    --output_dir /path/to/individual_beetles/ \
-    --padding 0
-```
-
-Outputs individual beetle images named `{original_name}_specimen_{N}.png`.
-
-### 2. Zero-Shot Object Detection
-
-Run automated beetle detection:
-
-```bash
-python scripts/beetle_detection.py \
-  --csv_path data/metadata.csv \
-  --image_dir data/group_images \
-  --save_folder data/individual_images \
-  --output_csv data/processed.csv
-```
-
-Optional parameters include `--model_id`, `--text` (detection prompt), `--box_threshold`, `--text_threshold`, `--iou_threshold`, and `--padding`. See Pipeline Components section for parameter details.
-
-### 3. Quality Control and Validation
-
-#### Inter-Annotator Agreement
-
-```bash
-python scripts/inter_annotator.py
-```
-
-Edit `DATA_PATH` and `ANNOTATOR_PAIRS` in the script to configure input data and comparisons. Outputs `InterAnnotatorAgreement.pdf` and console metrics.
-
-#### Human vs. Automated System
-
-```bash
-python scripts/calipers_vs_toras.py
-```
-
-Edit configuration variables in the script for data paths and comparison pairs. Generates `CalipersVsToras.pdf` with validation metrics.
-
-### 4. Data Visualization
-
-Run R script for NEON data analysis:
-
-```bash
-Rscript scripts/Figure6and10.R
-```
-
-Requires NEON API token saved in `NEON_Token.txt` and BeetlePalooza metadata. Edit paths in script as needed. Produces `BeetlePUUM_abundance.png` showing species distributions.
-
----
-
 ## 📊 Data Sources
 
 ### Hugging Face Datasets (Primary Access Point)
 
-The processed datasets from this pipeline are available on Hugging Face:
+The processed datasets from this pipeline are available on Hugging Face along with the original data:
 
 #### 1. Hawaii Beetles Dataset
 **Repository:** [imageomics/Hawaii-beetles](https://huggingface.co/datasets/imageomics/Hawaii-beetles)
