@@ -9,7 +9,7 @@
 - [Overview](#-overview)
 - [Project Structure](#-project-structure)
 - [Pipeline Components](#-pipeline-components)
-- [Installation](#-installation)
+- [Installation](#%EF%B8%8F-installation)
 - [Usage](#-usage)
   - [1. Individual Beetle Extraction](#1-individual-beetle-extraction)
   - [2. Zero-Shot Object Detection](#2-zero-shot-object-detection)
