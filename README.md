@@ -290,7 +290,7 @@ If you use this code or methodology, please cite both this repository and our pa
 @software{Rayeed_Carabidae_Beetle_Processing_2025,
    author = {Rayeed, S M and Khurana, Mridul and East, Alyson and Campolongo, Elizabeth G. and Stevens, Samuel and Wu, Jiaman and Taylor, Graham W.},
    license = {MIT},
-   month = nov,
+   month = dec,
    title = {{Carabidae Beetle Processing Pipeline}},
    url = {https://github.com/Imageomics/carabidae_beetle_processing},
    version = {1.0.0},
