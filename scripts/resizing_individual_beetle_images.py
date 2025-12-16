@@ -6,25 +6,26 @@ import os
 from PIL import Image
 import numpy as np
 
+# Set Base Directories
+BASE_DIR = "2018-NEON-beetles"
+ORIGINAL_GROUP_IMAGES_DIR = os.path.join(BASE_DIR, "group_images")
+PROCESS_DIR = os.path.join(BASE_DIR, "processed_images")
+
 def calculate_uniform_scaling_factors():
     """
     Calculate uniform scaling factors between original group images and BeetlePalooza resized images.
     Returns a dictionary mapping picture_id -> uniform_scale_factor
     """
-    # Paths
-    original_group_images_dir = "/fs/ess/PAS2136/Hawaii-2025/beetles_intake/2018-NEON-beetles/group_images"
-    resized_group_images_dir = "/fs/ess/PAS2136/paloozas/BeetlePalooza-2024/Resized Images [Corrected from ISA]"
-    
     scaling_factors = {}
     
     print("Step 1: Calculating uniform scaling factors between original and resized group images...")
     
     # Get list of resized images
-    if not os.path.exists(resized_group_images_dir):
-        print(f"Error: Directory {resized_group_images_dir} does not exist")
+    if not os.path.exists(PROCESS_DIR):
+        print(f"Error: Directory {PROCESS_DIR} does not exist")
         return {}
     
-    resized_files = [f for f in os.listdir(resized_group_images_dir) if f.lower().endswith(('.jpg', '.jpeg', '.png'))]
+    resized_files = [f for f in os.listdir(PROCESS_DIR) if f.lower().endswith(('.jpg', '.jpeg', '.png'))]
     print(f"Found {len(resized_files)} resized images")
     
     processed = 0
@@ -35,7 +36,7 @@ def calculate_uniform_scaling_factors():
         # Find corresponding original image
         original_path = None
         for ext in ['.jpg', '.jpeg', '.png', '.JPG', '.JPEG', '.PNG']:
-            potential_path = os.path.join(original_group_images_dir, picture_id + ext)
+            potential_path = os.path.join(ORIGINAL_GROUP_IMAGES_DIR, picture_id + ext)
             if os.path.exists(potential_path):
                 original_path = potential_path
                 break
@@ -45,8 +46,8 @@ def calculate_uniform_scaling_factors():
             continue
         
         # Load both images and get dimensions
-        resized_path = os.path.join(resized_group_images_dir, resized_filename)
-        
+        resized_path = os.path.join(PROCESS_DIR, resized_filename)
+
         try:
             with Image.open(original_path) as orig_img:
                 orig_width, orig_height = orig_img.size
@@ -82,7 +83,7 @@ def calculate_uniform_scaling_factors():
         print(f"  Std: {np.std(scale_values):.3f}")
     
     # Save scaling factors to JSON file for reference
-    output_json = "/fs/ess/PAS2136/Hawaii-2025/beetles_intake/beetlepalooza_processing_scripts/uniform_scaling_factors.json"
+    output_json = os.path.join(PROCESS_DIR, "uniform_scaling_factors.json")
     with open(output_json, 'w') as f:
         json.dump(scaling_factors, f, indent=2, sort_keys=True)
     print(f"Uniform scaling factors saved to: {output_json}")
@@ -130,10 +131,9 @@ def resize_individual_images_uniform():
     print("\nStep 2: Resizing individual specimen images using uniform scaling...")
     
     # Paths
-    csv_file = "/fs/ess/PAS2136/Hawaii-2025/beetles_intake/2018-NEON-beetles/individual_specimens.csv"
-    individual_images_base = "/fs/ess/PAS2136/Hawaii-2025/beetles_intake/2018-NEON-beetles"
-    output_dir = "/fs/ess/PAS2136/Hawaii-2025/beetles_intake/beetlepalooza_processing_scripts/individual_images_resized_uniform"
-    
+    csv_file = os.path.join(BASE_DIR, "individual_specimens.csv")
+    output_dir = os.path.join(PROCESS_DIR, "individual_images_resized_uniform")
+
     # Create output directory
     os.makedirs(output_dir, exist_ok=True)
     
@@ -163,7 +163,7 @@ def resize_individual_images_uniform():
                 continue
             
             # Full path to individual image
-            individual_path_full = os.path.join(individual_images_base, individual_path_rel)
+            individual_path_full = os.path.join(BASE_DIR, individual_path_rel)
             
             if not os.path.exists(individual_path_full):
                 skipped += 1
