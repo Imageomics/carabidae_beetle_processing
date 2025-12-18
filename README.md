@@ -1,4 +1,4 @@
-# Carabidae Beetle Processing Pipeline
+# Carabidae Beetle Processing Pipeline [![DOI](https://zenodo.org/badge/1089817772.svg)](https://doi.org/10.5281/zenodo.17980519)
 
 **Automated Processing and Quality Assessment for Beetle Morphometric Data**
 
@@ -294,7 +294,8 @@ If you use this code or methodology, please cite both this repository and our pa
    title = {{Carabidae Beetle Processing Pipeline}},
    url = {https://github.com/Imageomics/carabidae_beetle_processing},
    version = {1.0.0},
-   year = {2025}
+   year = {2025},
+   doi = {10.5281/zenodo.17980519}
 }
 ```
 
